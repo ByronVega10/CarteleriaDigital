@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const connectDB = require('./config/db');
 const playerRoutes = require('./routes/playerRoutes');
 const contentRoutes = require('./routes/contentRoutes');
+const path = require('path');
 
 const app = express();
 connectDB();
@@ -11,6 +12,7 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
+app.use('/videos', express.static(path.join(__dirname, '../../player/multimediaContent/videos')));
 
 app.use('/api/players', playerRoutes);
 app.use('/api/contents', contentRoutes);
